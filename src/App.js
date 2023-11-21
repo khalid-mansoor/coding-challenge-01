@@ -1,5 +1,22 @@
-function App() {
-  return <div className="App">Application</div>;
-}
+// src/App.js
+import React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Provider } from "react-redux";
+import store from "./store/store";
+import Home from "./views/Home";
+import Category from "./views/components/Category";
+
+const App = () => {
+  return (
+    <Provider store={store}>
+      <Router>
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/:category" component={Category} />
+        </Switch>
+      </Router>
+    </Provider>
+  );
+};
 
 export default App;
