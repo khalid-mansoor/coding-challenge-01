@@ -2,9 +2,9 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Provider } from "react-redux";
-import store from "./store/store";
+import store from "./store";
 import Home from "./views/Home";
-import Category from "./views/components/Category";
+import Category from "./views/Category";
 
 const App = () => {
   return (
