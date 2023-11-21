@@ -1,16 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const CategoryComponent = ({ category }) => {
+const CategoryComponent = ({ category, imageUrl }) => {
   return (
-    <div class="card">
-      <div class="card-body text-uppercase fw-bold">{category}</div>
-      <div className="card-footer">
-        <Link
-          to={`/${category}`}
-          className="text-decoration-none text-uppercase"
-        >
-          <button className="btn btn-primary">View Details</button>
+    <div className="card">
+      <img
+        src={imageUrl}
+        className="card-img-top"
+        height={"200px"}
+        width={100}
+        alt={`${category} Image`}
+      />
+      <div className="card-body">
+        <h5 className="card-title">{category}</h5>
+        <Link to={`/category/${category}`} className="btn btn-primary">
+          View Details
         </Link>
       </div>
     </div>
