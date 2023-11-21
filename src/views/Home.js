@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCategories } from "../store/actions/categoryActions";
+import CategoryComponent from "../components/CategoryComponent";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -15,13 +16,16 @@ const Home = () => {
   return (
     <div>
       <h1> Application </h1>
-      <ul>
-        {categories?.map((category) => (
-          <li key={category}>
-            <Link to={`/${category}`}>{category}</Link>
-          </li>
-        ))}
-      </ul>
+      <div className="container">
+        <div className="row">
+          {categories &&
+            categories?.map((category) => (
+              <Link to={`/${category}`}>
+                <CategoryComponent category={category} />
+              </Link>
+            ))}
+        </div>
+      </div>
     </div>
   );
 };
