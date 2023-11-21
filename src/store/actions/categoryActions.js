@@ -1,5 +1,10 @@
 import axios from "axios";
-import { SET_CATEGORIES, SET_SELECTED_CATEGORY } from "../types";
+import {
+  SET_CATEGORIES,
+  SET_SELECTED_CATEGORY,
+  GET_CATEGORIES_LOADER,
+  SET_ITEMS_LOADER,
+} from "../types";
 
 export const setCategories = (categories) => ({
   type: SET_CATEGORIES,
@@ -11,32 +16,36 @@ export const setSelectedCategory = (category) => ({
   payload: category,
 });
 
+export const getCategoriesLoader = (category) => ({
+  type: GET_CATEGORIES_LOADER,
+  payload: category,
+});
+export const getCategoriesItemsLoader = (category) => ({
+  type: SET_ITEMS_LOADER,
+  payload: category,
+});
 export const fetchCategories = () => async (dispatch) => {
   try {
-    axios
-      .get("https://swapi.dev/api/")
-      .then((response) => {
-        dispatch(setCategories(Object.keys(response.data)));
-      })
-      .catch((error) => console.error("Error fetching categories:", error));
-  } catch (err) {
-    console.log("err: ", err);
+    dispatch(getCategoriesLoader(true));
+
+    const response = await axios.get("https://swapi.dev/api/");
+    dispatch(setCategories(Object.keys(response.data)));
+    dispatch(getCategoriesLoader(false));
+  } catch (error) {
+    console.error("Error fetching categories:", error);
+    dispatch(getCategoriesLoader(false));
   }
 };
 
 export const fetchCategoryItems = (category) => async (dispatch) => {
-  console.log("category: ", category);
   try {
-    axios
-      .get(`https://swapi.dev/api/${category}`)
-      .then((response) => {
-        dispatch(setSelectedCategory(response.data));
-        console.log("response.data: ", response.data);
-      })
-      .catch((error) =>
-        console.error(`Error fetching ${category} items:`, error)
-      );
-  } catch (err) {
-    console.log("err: ", err);
+    dispatch(getCategoriesItemsLoader(true));
+
+    const response = await axios.get(`https://swapi.dev/api/${category}`);
+    dispatch(setSelectedCategory(response.data));
+    dispatch(getCategoriesItemsLoader(false));
+  } catch (error) {
+    console.error(`Error fetching ${category} items:`, error);
+    dispatch(getCategoriesItemsLoader(false));
   }
 };
