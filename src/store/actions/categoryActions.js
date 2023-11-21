@@ -25,6 +25,7 @@ export const fetchCategories = () => async (dispatch) => {
 };
 
 export const fetchCategoryItems = (category) => async (dispatch) => {
+  console.log("category: ", category);
   try {
     axios
       .get(`https://swapi.dev/api/${category}`)

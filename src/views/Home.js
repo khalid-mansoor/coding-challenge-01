@@ -14,7 +14,7 @@ const Home = () => {
 
   return (
     <div>
-      <h1> Application</h1>
+      <h1> Application </h1>
       <ul>
         {categories?.map((category) => (
           <li key={category}>
