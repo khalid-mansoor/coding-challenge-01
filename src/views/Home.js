@@ -1,4 +1,3 @@
-// src/components/Home.js
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCategories } from "../store/actions/categoryActions";

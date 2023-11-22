@@ -13,7 +13,7 @@ const CategoryComponent = ({ category, imageUrl }) => {
       />
       <div className="card-body">
         <h5 className="card-title">{category}</h5>
-        <Link to={`/category/${category}`} className="btn btn-primary">
+        <Link to={`/${category}`} className="btn btn-primary">
           View Details
         </Link>
       </div>
